@@ -18,10 +18,9 @@ class Request():
 
     @property
     def call(self):
-        headers = {'user-agent': 'RapidAPIConnect_Python'}
         response = requests.post(self.urlBuilder,
                                  auth=(self.project, self.token),
-                                 headers=headers
+                                 headers={'user-agent': 'RapidAPIConnect_Python'},
                                  data=self.params).text
 
         objectResponse = ast.literal_eval(response)
