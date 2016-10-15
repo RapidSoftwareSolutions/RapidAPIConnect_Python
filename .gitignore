@@ -1,2 +1,4 @@
 .idea
 RapidConnect-Python.iml
+build
+dist
