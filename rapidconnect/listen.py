@@ -34,7 +34,9 @@ class Listen():
         if decoded["event"] == "phx_reply" and decoded["payload"]["status"] == "ok" and self.on_join:
             self.on_join()
             return
-        if decoded["event"] == "new_msg" and decoded["payload"]["token"] == self.socket_token and self.on_message:
+        if decoded["event"] == "new_msg" and decoded.get("payload").get("token") == None:
+            self.on_error(decoded["payload"]["body"])
+        elif decoded["event"] == "new_msg" and decoded["payload"]["token"] == self.socket_token and self.on_message:
             self.on_message(decoded["payload"]["body"])
         elif self.on_error:
             self.on_error(decoded["payload"]["body"])
