@@ -2,7 +2,6 @@ import requests
 import websocket
 import json
 import threading
-import time
 
 class Listen():
     def __init__(self, project, token, package, event, params,
@@ -17,12 +16,10 @@ class Listen():
         self.user_id = "%s.%s_%s:%s" % (package, event, self.project, self.token)
 
     def tokenUrl(self, user_id):
-        return "https://webhooks.rapidapi.xyz/api/get_token?user_id=%s" % (user_id)
-        #return "https://webhooks.imrapid.io/api/get_token?user_id=%s" % (user_id)
+        return "https://webhooks.rapidapi.com/api/get_token?user_id=%s" % (user_id)
 
     def socketUrl(self, token):
-        return "wss://webhooks.rapidapi.xyz/socket/websocket?token=%s" % (token)
-        #return "wss://webhooks.imrapid.io/socket/websocket?token=%s" % (token)
+        return "wss://webhooks.rapidapi.com/socket/websocket?token=%s" % (token)
 
     def on_open(self, ws):
         users_socket = "users_socket:%s" % (self.user_id)
@@ -59,4 +56,5 @@ class Listen():
                                          on_message = self.on_msg_received,
                                          on_close = self.on_closed,
                                          on_ping=self.send_heartbeat)
-        self.ws.run_forever(ping_interval=30)
+        wst = threading.Thread(target=self.ws.run_forever, kwargs={'ping_interval': 30})
+        wst.start()
