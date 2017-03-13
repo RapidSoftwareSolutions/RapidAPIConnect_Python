@@ -4,7 +4,7 @@ from __future__ import (print_function, unicode_literals, division, absolute_imp
 
 from rapidconnect.settings import DEFAULT_BASE_ENDPOINT
 from rapidconnect.request  import Request
-
+from rapidconnect.listen   import Listen
 
 class RapidConnect(object):
 
@@ -22,3 +22,8 @@ class RapidConnect(object):
                           base_endpoint=self.base_endpoint)
 
         return request.call
+
+    def listen(self, package, event, params,
+               on_join=None, on_message=None, on_close=None, on_error=None):
+        event = Listen(self.project, self.token, package, event, params, on_join, on_message, on_close, on_error)
+        event.listen()
