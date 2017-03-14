@@ -2,7 +2,7 @@
 
 from rapidconnect import RapidConnect
 
-rapid = RapidConnect("giladProject", "72466c25-98a1-46a5-bf88-e711deda6b5b")
+rapid = RapidConnect("testa", "a3787239-bb1e-4fa4-85c3-a423fa6af51f")
 
 result = rapid.call("GoogleTranslate", "translate", {
     'string': 'שלום',

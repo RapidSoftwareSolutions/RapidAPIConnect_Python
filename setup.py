@@ -20,5 +20,6 @@ setup(
         install_requires=[
             'requests>=2.8.1',
             'six>=1.10.0',
+            'websocket-client>=0.40.0'
         ],
 )
