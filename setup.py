@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
         name='RapidConnect',
-        version='0.0.2',
+        version='0.0.4',
         author='Andrey Bukati',
         author_email='andrey@rapidapi.com',
         description='Official Python client for RapidAPI Connect',
