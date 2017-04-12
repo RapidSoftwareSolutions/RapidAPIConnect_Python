@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import (print_function, unicode_literals, division, absolute_import)
 import requests
-import ast
+import json
 
 class Request():
     def __init__(self, project, token, package, block, params, base_endpoint):
@@ -23,7 +23,7 @@ class Request():
                                  headers={'user-agent': 'RapidAPIConnect_Python'},
                                  data=self.params).text
 
-        objectResponse = ast.literal_eval(response)
+        objectResponse = json.loads(response)
 
         if 'payload' in objectResponse:
             return objectResponse['payload']
