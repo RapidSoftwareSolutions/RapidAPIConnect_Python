@@ -22,7 +22,7 @@ class Listen():
         return "wss://webhooks.rapidapi.com/socket/websocket?token=%s" % (token)
 
     def on_open(self, ws):
-        users_socket = "users_socket:%s" % (self.user_id)
+        users_socket = "users_socket:%s" % (self.socket_token)
         connect = {'topic': users_socket, 'event': 'phx_join', 'ref': '1', 'payload': self.webhook_params}
         self.ws.send(json.dumps(connect))
 
@@ -30,10 +30,9 @@ class Listen():
         decoded = json.loads(message)
         if decoded["event"] == "phx_reply" and decoded["payload"]["status"] == "ok" and self.on_join:
             self.on_join()
-            return
         if decoded["event"] == "new_msg" and decoded.get("payload").get("token") == None:
             self.on_error(decoded["payload"]["body"])
-        elif decoded["event"] == "new_msg" and decoded["payload"]["token"] == self.socket_token and self.on_message:
+        elif decoded["event"] == "new_msg" and self.on_message:
             self.on_message(decoded["payload"]["body"])
         elif self.on_error:
             self.on_error(decoded["payload"]["body"])
