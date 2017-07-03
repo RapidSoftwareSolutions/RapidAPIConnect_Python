@@ -16,10 +16,10 @@ class Listen():
         self.user_id = "%s.%s_%s:%s" % (package, event, self.project, self.token)
 
     def tokenUrl(self, user_id):
-        return "https://webhooks.rapidapi.com/api/get_token?user_id=%s" % (user_id)
+        return "https://webhooks.rapidapi.io/api/get_token?user_id=%s" % (user_id)
 
     def socketUrl(self, token):
-        return "wss://webhooks.rapidapi.com/socket/websocket?token=%s" % (token)
+        return "wss://webhooks.rapidapi.io/socket/websocket?token=%s" % (token)
 
     def on_open(self, ws):
         users_socket = "users_socket:%s" % (self.socket_token)
